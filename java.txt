@@ -1,0 +1,577 @@
+﻿package com.javarush.test.level06.lesson11.bonus03;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
+/* Задача по алгоритмам
+Задача: Написать программу, которая вводит с клавиатуры 5 чисел и выводит их в возрастающем порядке.
+Пример ввода:
+3
+2
+15
+6
+17
+Пример вывода:
+2
+3
+6
+15
+17
+*/
+
+public class Solution
+{
+    public static void main(String[] args) throws Exception
+    {
+         int[] mas = new int[5];
+         BufferedReader reader  = new BufferedReader(new InputStreamReader(System.in));
+            for (int i = 0; i < 5; i++ )
+                {
+                   mas[i] = Integer.parseInt(reader.readLine());
+                }
+
+
+       // bubbleSort(mas);
+        Arrays.sort(mas);
+        for(int i = 0; i <  mas.length; i++)
+        {
+            System.out.print(mas[i] + "  ");
+        }
+
+    }
+    public static void bubbleSort(int[] mas)
+    {
+        for (int i = mas.length -1 ; i > 0; i-- )
+        {
+            for(int j = 0 ; j < i ; j++)
+            {
+                if (mas[j] > mas[j+1])
+                {
+                    int tmp = mas[j];
+                    mas[j] = mas[j+1];
+                    mas[j+1] = tmp;
+                }
+            }
+        }
+    }
+
+}
+
+
+
+package com.javarush.test.level07.lesson12.bonus02;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+/* Нужно добавить в программу новую функциональность
+Задача:  Программа вводит строки, пока пользователь не введёт пустую строку (нажав enter).
+Потом она конвертирует строки в верхний регистр (Мама превращается в МАМА) и выводит их на экран.
+Новая задача: Программа вводит строки, пока пользователь не введёт пустую строку (нажав enter).
+Потом программа строит новый список. Если в строке чётное число букв, строка удваивается, если нечётное – утраивается.
+Пример ввода:
+Кот
+Коты
+Я
+Пример вывода:
+Кот Кот Кот
+Коты Коты
+Я Я Я
+*/
+
+public class Solution
+{
+    public static void main(String[] args) throws IOException
+    {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        ArrayList<String> list = new ArrayList<String>();
+        while (true)
+        {
+            String s = reader.readLine();
+            if (s.isEmpty()) break;
+            list.add(s);
+        }
+
+        ArrayList<String> listUpperCase = new ArrayList<String>();
+
+        for (int i = 0; i < list.size(); i++)
+        {
+            String s = list.get(i);
+            if (s.length() % 2 == 0)
+                {
+                //listUpperCase.add(s + " " + s );
+                listUpperCase.add(s);
+                listUpperCase.add(s);
+
+                }
+            else
+            {//listUpperCase.add(s + " " + s + " " + s);
+                listUpperCase.add(s);
+                listUpperCase.add(s);
+                listUpperCase.add(s);}
+
+        }
+
+        for (int i = 0; i < listUpperCase.size(); i++)
+        {
+            System.out.println(listUpperCase.get(i));
+
+        }
+    }
+}
+
+
+
+package com.javarush.test.level07.lesson09.task01;
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+/* Три массива
+1. Введи с клавиатуры 20 чисел, сохрани их в список и рассортируй по трём другим спискам:
+Число делится на 3 (x%3==0), делится на 2 (x%2==0) и все остальные.
+Числа, которые делятся на 3 и на 2 одновременно, например 6, попадают в оба списка.
+2. Метод printList должен выводить на экран все элементы списка  с новой строки.
+3. Используя метод printList выведи эти три списка на экран. Сначала тот, который для x%3, потом тот, который для x%2, потом последний.
+*/
+
+public class Solution
+{
+    public static void main(String[] args) throws Exception
+    {
+        //---------------------------------//
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < 20; i++)
+        {
+            list.add(Integer.parseInt(reader.readLine()));
+        }
+        //---------------------------------//
+
+        ArrayList<Integer> list1 = new ArrayList<Integer>();
+        ArrayList<Integer> list2 = new ArrayList<Integer>();
+        ArrayList<Integer> list3 = new ArrayList<Integer>();
+
+
+        for (int i = 0; i < list.size(); i++)
+        {
+            if (list.get(i) % 3 == 0 && list.get(i) % 2 == 0 )
+             {
+                     list1.add(list.get(i));
+                     list2.add(list.get(i));
+             }
+            else if (list.get(i) % 3 == 0 )
+            {
+                     list1.add(list.get(i));
+            }
+            else if (list.get(i) % 2 == 0 )
+                     list2.add(list.get(i));
+            else
+                     list3.add(list.get(i));
+        }
+
+        printList(list1);
+        printList(list2);
+        printList(list3);
+
+
+    }
+
+    public static void printList(List<Integer> list) {
+        //add your code here
+       for (int j : list)
+       {
+           System.out.println(j);
+       }
+    }
+}
+
+
+package com.javarush.test.level07.lesson09.task04;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+/* Буква «р» и буква «л»
+1. Создай список слов, заполни его самостоятельно.
+2. Метод fix должен:
+2.1. удалять из списка строк все слова, содержащие букву «р»
+2.2. удваивать все слова содержащие букву «л».
+2.3. если слово содержит и букву «р» и букву «л», то оставить это слово без изменений.
+2.4. с другими словами ничего не делать.
+Пример:
+роза
+лира
+лоза
+Выходные данные:
+лира
+лоза
+лоза
+*/
+
+public class Solution
+{
+    public static void main(String[] args) throws Exception
+    {
+        BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
+
+        ArrayList<String> list = new ArrayList<String>();
+        list.add(bis.readLine()); //0
+        list.add(bis.readLine()); //1
+        list.add(bis.readLine()); //2
+        list = fix(list);
+
+        for (String s : list)
+        {
+            System.out.println(s);
+        }
+    }
+
+    public static ArrayList<String> fix(ArrayList<String> list) {
+        //add your code here -  добавь код тут
+            ArrayList<String> list1 = new ArrayList<String>();
+
+            for (int i = 0; i < list.size();i++ )
+              {
+                if (list.get(i).contains("р") && list.get(i).contains("л") )
+                    {
+                    list1.add(list.get(i));
+                    }
+                 else if (list.get(i).contains("л"))
+                    {
+                        list1.add(list.get(i));
+                        list1.add(list.get(i));
+
+                    }
+                  else if (!list.get(i).contains("р"))
+                    {
+                        list1.add(list.get(i));
+                    }
+
+
+
+              }
+            return list1;
+        }
+}
+
+
+package com.javarush.test.level07.lesson12.home06;
+
+/* Семья
+Создай класс Human с полями имя(String), пол(boolean),возраст(int), отец(Human), мать(Human).
+Создай объекты и заполни их так, чтобы получилось: Два дедушки, две бабушки, отец, мать, трое детей. Вывести объекты на экран.
+Примечание:
+Если написать свой метод String toString() в классе Human, то именно он будет использоваться при выводе объекта на экран.
+Пример вывода:
+Имя: Аня, пол: женский, возраст: 21, отец: Павел, мать: Катя
+Имя: Катя, пол: женский, возраст: 55
+Имя: Игорь, пол: мужской, возраст: 2, отец: Михаил, мать: Аня
+…
+*/
+
+public class Solution
+{
+    public static void main(String[] args)
+    {
+        //Написать тут ваш код
+        Human uncle = new Human("ded1", true, 99);
+        Human uncle1 = new Human("ded2", true, 98);
+        Human grandmother = new Human("bab1", true, 98);
+        Human grandmother1 = new Human("bab 2", true, 98);
+        Human father = new Human("PAPA", true, 45, uncle, grandmother);
+        Human mother = new Human("PAPA", true, 45, uncle1, grandmother1);
+        Human kid1 = new Human("kid1", false, 10, father, mother);
+        Human kid2 = new Human("kid2", false, 12, father, mother);
+        Human kid3 = new Human("kid3", false, 13, father, mother);
+
+        System.out.println(uncle);
+        System.out.println(uncle1);
+        System.out.println(grandmother);
+        System.out.println(grandmother1);
+        System.out.println(father);
+        System.out.println(mother);
+        System.out.println(kid1);
+        System.out.println(kid2);
+        System.out.println(kid3);
+    }
+
+    public static class Human
+    {
+        //Написать тут ваш код
+        String name;
+        Boolean sex;
+        int age;
+        String father;
+        String mother;
+
+        public Human (String name, Boolean sex,int age )
+        {
+            this.name = name;
+            this.sex = sex;
+            this.age = age;
+        }
+        public Human (String name, Boolean sex,int age, Human father, Human mother )
+        {
+            this.name = name;
+            this.sex = sex;
+            this.age = age;
+            this.father = father.name;
+            this.mother = mother.name;
+        }
+
+        public String toString()
+        {
+            String text = "";
+            text += "Имя: " + this.name;
+            text += ", пол: " + (this.sex ? "мужской" : "женский");
+            text += ", возраст: " + this.age;
+
+            if (this.father != null)
+                text += ", отец: " + this.father;
+
+            if (this.mother != null)
+                text += ", мать: " + this.mother;
+
+            return text;
+        }
+    }
+
+}
+
+
+
+package com.javarush.test.level08.lesson06.task03;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+/* Измерить сколько времени занимает 10 тысяч вставок для каждого списка
+Измерить, сколько времени занимает 10 тысяч вставок для каждого списка.
+Метод getTimeMsOfInsert  должен вернуть время его исполнения в миллисекундах.
+*/
+
+public class Solution
+{
+    public static void main(String[] args)
+    {
+        System.out.println(getTimeMsOfInsert(new ArrayList()));
+        System.out.println(getTimeMsOfInsert(new LinkedList()));
+    }
+
+    public static long  getTimeMsOfInsert(List list)
+    {
+
+        Date currentTime = new Date();
+
+        insert10000(list);
+
+        Date newTime = new Date();
+
+        long msDelay = newTime.getTime() - currentTime.getTime();
+        return msDelay;
+
+    }
+
+    public static void insert10000(List list)
+    {
+        for (int i=0;i<10000;i++)
+        {
+            list.add(0, new Object());
+        }
+    }
+}
+
+
+package com.javarush.test.level08.lesson06.task02;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+/* Провести 10 тысяч вставок, удалений
+Для arrayList и linkedList провести 10 тысяч вставок, удалений, а также вызовов get и set.
+*/
+
+public class Solution
+{
+    public static void main(String[] args) throws Exception
+    {
+        // ArrayList
+        ArrayList arrayList = new ArrayList();
+        insert10000(arrayList);
+        get10000(arrayList);
+        set10000(arrayList);
+        remove10000(arrayList);
+
+        // LinkedList
+        LinkedList linkedList = new LinkedList();
+        insert10000(linkedList);
+        get10000(linkedList);
+        set10000(linkedList);
+        remove10000(linkedList);
+    }
+
+    public static void insert10000(List list)
+    {
+        //Напишите тут ваш код
+        for (int i = 0; i < 10000; i++)
+        {
+            list.add(new Object());
+        }
+
+
+    }
+
+    public static void get10000(List list)
+    {
+        for (int i = 0; i < 10000; i++)
+        {
+            list.get(i);
+        }
+    }
+
+    public static void set10000(List list)
+    {
+        for (int i = 0; i < 10000; i++)
+        {
+            list.set(i,new Object());
+        }
+
+    }
+
+    public static void remove10000(List list)
+    {
+        for (int i = 0; i < 10000; i++)
+        {
+            list.remove(0);
+        }
+
+    }
+}
+
+
+package com.javarush.test.level08.lesson06.task04;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+/* Измерить сколько времени занимает 10 тысяч вызовов get для каждого списка
+Измерить, сколько времени занимает 10 тысяч вызовов get для каждого списка.
+Метод getTimeMsOfGet  должен вернуть время его исполнения в миллисекундах.
+*/
+
+public class Solution
+{
+    public static void main(String[] args)
+    {
+        System.out.println(getTimeMsOfGet(fill(new ArrayList())));
+        System.out.println(getTimeMsOfGet(fill(new LinkedList())));
+    }
+
+    private static List fill(List list)
+    {
+        for(int i = 0; i < 11; i++)
+        {
+            list.add(new Object());
+        }
+        return list;
+    }
+
+    public static long  getTimeMsOfGet(List list)
+    {
+        //Напишите тут ваш код
+        Date currentTime = new Date();
+
+        get10000(list);;
+
+        Date newTime = new Date();
+
+        long msDelay = newTime.getTime() - currentTime.getTime();
+        return msDelay;
+
+
+        //Напишите тут ваш код
+
+    }
+
+    public static void get10000(List list)
+    {
+        if (list.isEmpty()) return;
+        int x = list.size() / 2;
+
+        for (int i = 0; i < 10000; i++)
+        {
+            list.get(x);
+        }
+    }
+}
+
+
+
+
+
+package com.javarush.test.level08.lesson08.task04;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+/* Удалить всех людей, родившихся летом
+Создать словарь (Map<String, Date>) и занести в него десять записей по принципу: «фамилия» - «дата рождения».
+Удалить из словаря всех людей, родившихся летом.
+*/
+
+public class Solution
+{
+    public static void main(String[] args) {
+        HashMap<String, Date> map = createMap();
+        removeAllSummerPeople(map);
+    }
+    public static HashMap<String, Date> createMap()
+    {
+        HashMap<String, Date> map = new HashMap<String, Date>();
+        map.put("Сталлоне", new Date("JUNE 1 1980"));
+        map.put("Сталин", new Date("JUNE 1 1980"));
+        map.put("Батистута", new Date("JUNE 1 1980"));
+        map.put("Матиз", new Date("SEPTEMBER 1 1980"));
+        map.put("Борис", new Date("FEBRUARY 1 1980"));
+        map.put("Новел", new Date("MARCH 1 1980"));
+        map.put("Виолла", new Date("MAY 1 1980"));
+        map.put("Шокин", new Date("MAY 1 1980"));
+        map.put("Феликс", new Date("JUNE 1 1980"));
+        map.put("Эдмунд", new Date("JUNE 1 1980"));
+
+        //Напишите тут ваш код
+        return map;
+    }
+
+    public static void removeAllSummerPeople(HashMap<String, Date> map)
+    {
+        //Напишите тут ваш код
+        Iterator<Map.Entry<String ,Date>> iterator = map.entrySet().iterator();
+
+            while (iterator.hasNext())
+            {
+                   Map.Entry<String, Date> pair = iterator.next();
+                    Date value = pair.getValue();
+                    int rad = value.getMonth();
+                     if(rad == 5 || rad == 6 || rad == 7)
+                        iterator.remove();
+            }
+    }
+}
+
