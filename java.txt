@@ -575,3 +575,128 @@ public class Solution
     }
 }
 
+
+
+
+
+
+package com.javarush.test.level08.lesson08.task05;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/* Удалить людей, имеющих одинаковые имена
+Создать словарь (Map<String, String>) занести в него десять записей по принципу «фамилия» - «имя».
+Удалить людей, имеющих одинаковые имена.
+*/
+
+public class Solution
+{
+    public static HashMap<String, String> createMap()
+    {
+        //Напишите тут ваш код
+        HashMap<String,String> map = new HashMap<String, String>();
+
+        map.put( "Ivanov", "Ivan" );
+        map.put( "Petrov", "Petr" );
+        map.put( "Sidorov", "Ivan" );
+        map.put( "Semenov", "Sergey" );
+        map.put( "Frolov", "Igor" );
+        map.put( "Sergeev", "Igor" );
+        map.put( "Kostenko", "Alexey" );
+        map.put( "Petrenko", "Sergey" );
+        map.put( "Dmitriev", "Sergey" );
+        map.put( "Nikonov", "Petr" );
+
+        return map;
+
+    }
+
+    public static void removeTheFirstNameDuplicates(HashMap<String, String> map)
+    {
+        //Напишите тут ваш код
+        HashMap<String, String> map1 = new HashMap<String, String>(map);
+        HashMap<String, String> map2 = new HashMap<String, String>(map);
+
+        for (Map.Entry<String, String> pair: map1.entrySet())
+        {
+            map2.remove(pair.getKey());
+
+            if (map2.containsValue(pair.getValue()))
+            {
+                removeItemFromMapByValue(map, pair.getValue());
+            }
+        }
+
+
+    }
+
+    public static void removeItemFromMapByValue(HashMap<String, String> map, String value)
+    {
+        HashMap<String, String> copy = new HashMap<String, String>(map);
+        for (Map.Entry<String, String> pair: copy.entrySet())
+        {
+            if (pair.getValue().equals(value))
+                map.remove(pair.getKey());
+        }
+    }
+}
+
+
+
+
+package com.javarush.test.level08.lesson11.home01;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+/* Set из котов
+1. Внутри класса Solution создать public static класс кот – Cat.
+2. Реализовать метод createCats, он должен создавать множество (Set) котов и добавлять в него 3 кота.
+3. В методе main удалите одного кота из Set cats.
+4. Реализовать метод printCats, он должен вывести на экран всех котов, которые остались во множестве. Каждый кот с новой строки.
+*/
+
+public class Solution
+{
+    public static void main(String[] args)
+    {
+        Set<Cat> cats = createCats();
+
+        
+        Iterator<Cat> iterator = cats.iterator();
+        cats.remove(iterator.next());
+
+        printCats(cats);
+    }
+
+    public static Set<Cat> createCats()
+    {
+        
+        HashSet<Cat> set = new HashSet<Cat>();
+        set.add(new Cat());
+        set.add(new Cat());
+        set.add(new Cat());
+
+        return set;
+    }
+
+    public static void printCats(Set<Cat> cats)
+    {
+       
+        for (Cat text : cats )
+        {
+            System.out.println(text);
+        }
+    }
+
+  
+    public static class Cat
+    {
+
+    }
+
+}
+
